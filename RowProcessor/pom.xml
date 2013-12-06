@@ -28,9 +28,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.cassandra</groupId>
-            <artifactId>cassandra-all</artifactId>
-            <version>1.2.9</version>
+            <groupId>org.apache</groupId>
+            <artifactId>cassandra</artifactId>
+            <version>0.6.13-p33</version>
         </dependency>
     </dependencies>
 
