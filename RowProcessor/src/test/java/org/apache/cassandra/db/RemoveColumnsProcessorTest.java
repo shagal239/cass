@@ -36,12 +36,12 @@ public class RemoveColumnsProcessorTest {
         RowMutation rm;
 
         RemoveColumnsRowProcessor.PERCENT = 1;
-        RemoveColumnsRowProcessor.table = TABLE1;
         RemoveColumnsRowProcessor.MAXSIZE = 25000;
         // inserts
-        int initSize = (int) 1e7;
+        int initSize = (int) 1e4*5;
         rm = new RowMutation(TABLE1, key);
-        for (int i = 0; i < initSize; i++) {
+        int i;
+        for (i = 0; i < initSize; i++) {
 
             rm.add(new QueryPath(cfName, null, String.valueOf(i).getBytes("UTF-8")), ByteBuffer.allocate(4).putInt(239).array(),  0);
             if(i % 1000 == 0){
@@ -62,6 +62,7 @@ public class RemoveColumnsProcessorTest {
 
         ColumnFamily retrieved = cfs.getColumnFamily(new IdentityQueryFilter(key, new QueryPath(cfName)), Integer.MAX_VALUE);
 
+        assertTrue(retrieved.getSortedColumns().size() < i);
         System.err.println(retrieved.getSortedColumns().size());
 
     }
